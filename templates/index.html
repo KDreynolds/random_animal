@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Animal Generator</title>
+    <!-- Add some CSS for styling -->
+</head>
+<body>
+    <h1>Discover a New Animal!</h1>
+    <button id="randomAnimalButton">Show Random Animal</button>
+    <div id="animalInfo">
+        <h2 id="animalName"></h2>
+        <img id="animalImage" src="" alt="Animal Image" style="max-width: 300px; display: none;"/>
+    </div>
+
+    <script>
+        document.getElementById('randomAnimalButton').addEventListener('click', function() {
+            fetch('/random-animal')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('animalName').textContent = data.name;
+                    document.getElementById('animalImage').src = data.image;
+                    document.getElementById('animalImage').style.display = data.image ? 'block' : 'none'; // Hide the image element if there is no image
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+    
+</body>
+</html>
